@@ -90,6 +90,35 @@ A starter Unraid template is included here:
 
 You will want to replace the placeholder repository URLs with your own image location if you publish the image.
 
+
+## Publish to GitHub Container Registry (GHCR)
+
+This repo includes a GitHub Actions workflow at `.github/workflows/publish-image.yml` that automatically builds and publishes a Docker image to GHCR.
+
+### One-time setup
+
+1. Push this repository to GitHub.
+2. In GitHub, open **Settings -> Actions -> General** and keep the default `GITHUB_TOKEN` permissions enabled for workflow runs.
+3. Make sure your default branch is `main` (or update the workflow trigger).
+
+### How publishing works
+
+- Push to `main`: publishes `ghcr.io/<owner>/<repo>:latest` and `ghcr.io/<owner>/<repo>:sha-<shortsha>`
+- Push a Git tag like `v1.0.0`: publishes a matching tag such as `ghcr.io/<owner>/<repo>:v1.0.0`
+- Manual run: use **Actions -> Publish Docker image -> Run workflow**
+
+### Use in Unraid
+
+In Unraid **Docker -> Add Container**, set:
+
+- **Repository:** `ghcr.io/<owner>/<repo>:latest`
+- **Host Port -> Container Port:** `8098 -> 8080`
+- **Config mount:** your Fail2ban `/config` host folder -> `/data/fail2ban`
+- **Socket mount (optional):** `/var/run/docker.sock -> /var/run/docker.sock`
+- **Env:** `FAIL2BAN_CONTAINER_NAME=<your-fail2ban-container-name>`
+
+If your package visibility in GitHub is private, Unraid will need registry credentials to pull the image.
+
 ## Running It
 
 ### Local Docker Build
