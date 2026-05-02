@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Fail2ban-Studio</Name>
+  <Repository>fail2ban-studio:latest</Repository>
+  <Registry>https://hub.docker.com/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/your-user/fail2ban-studio</Support>
+  <Project>https://github.com/your-user/fail2ban-studio</Project>
+  <Overview>A companion dashboard for Docker-based Fail2ban setups on Unraid. It writes a managed jail.d local file, exposes an elegant web UI, and can talk to the Fail2ban container through the Docker socket for live status and actions.</Overview>
+  <Category>Security:</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://github.com/your-user/fail2ban-studio/raw/main/unraid/fail2ban-studio.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/limetech/unRAID-templates/master/templates/img/security-icon.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <Config Name="Web UI Port" Target="8080" Default="8080" Mode="tcp" Description="Web UI port for Fail2ban Studio." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="Fail2ban Config" Target="/data/fail2ban" Default="/mnt/user/appdata/fail2ban" Mode="rw" Description="Use the same host folder that the Fail2ban container mounts to /config." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/fail2ban</Config>
+  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Optional but recommended. Required for live status, ban/unban, and reload buttons." Type="Path" Display="advanced" Required="false" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="Fail2ban Container Name" Target="FAIL2BAN_CONTAINER_NAME" Default="fail2ban" Mode="" Description="Name of your existing Fail2ban container." Type="Variable" Display="always" Required="true" Mask="false">fail2ban</Config>
+  <Config Name="Port" Target="PORT" Default="8080" Mode="" Description="Internal app port." Type="Variable" Display="advanced" Required="false" Mask="false">8080</Config>
+</Container>

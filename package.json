@@ -1,0 +1,13 @@
+{
+  "name": "fail2ban-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A polished Fail2ban companion dashboard for Unraid and Docker-first setups.",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
